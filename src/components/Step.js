@@ -142,19 +142,6 @@ export default class JoyrideStep extends React.Component {
           });
         }
       }
-
-      if (!hasRenderedTarget) {
-        console.warn('Target not mounted', step); //eslint-disable-line no-console
-        callback({
-          ...state,
-          type: EVENTS.TARGET_NOT_FOUND,
-          step,
-        });
-
-        if (!controlled) {
-          update({ index: index + ([ACTIONS.PREV].includes(action) ? -1 : 1) });
-        }
-      }
     }
 
     /* istanbul ignore else */

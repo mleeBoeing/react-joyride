@@ -292,7 +292,7 @@ class Joyride extends React.Component {
           }
         }
 
-        if (status === STATUS.RUNNING && shouldScroll && scrollY >= 0) {
+        if (status === STATUS.RUNNING && shouldScroll) {
           scrollTo(scrollY, scrollParent);
         }
       }
