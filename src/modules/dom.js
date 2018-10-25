@@ -166,8 +166,6 @@ export function scrollTo(value: number, element: HTMLElement = scrollDoc()): Pro
 
     const limit = value > scrollTop ? value - scrollTop : scrollTop - value;
 
-    console.log(value);
-    console.log(limit);
     scroll.top(element, value, { duration: limit < 100 ? 50 : 300 }, (error) => {
       if (error && error.message !== 'Element already at target scroll position') {
         return reject(error);

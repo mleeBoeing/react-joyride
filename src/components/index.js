@@ -252,7 +252,6 @@ class Joyride extends React.Component {
 
     if (step) {
       const target = getElement(step.target);
-
       const shouldScroll = step
         && !disableScrolling
         && (!step.isFixed || !isFixed(target)) // fixed steps don't need to scroll
@@ -282,10 +281,14 @@ class Joyride extends React.Component {
           }
         }
         else if (lifecycle === LIFECYCLE.TOOLTIP && this.tooltipPopper) {
-          const { flipped, placement, popper } = this.tooltipPopper;
-
-          if (['top', 'right'].includes(placement) && !flipped && !hasCustomScroll) {
+          const { flipped, originalPlacement, popper } = this.tooltipPopper;
+          if (['top', 'right'].includes(originalPlacement) && !hasCustomScroll) {
             scrollY = Math.floor(popper.top - scrollOffset);
+
+            // Since tooltip is flipped and originally was top. Take into account of tooltip height and scrolling offset to return back to original placement of tooltip/scroll.
+            if (flipped) {
+              scrollY -= this.tooltipPopper.offsets.reference.height + scrollOffset;
+            }
           }
           else {
             scrollY -= step.spotlightPadding;
